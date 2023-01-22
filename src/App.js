@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [minVal, setMinVal] = useState();
+  const [maxVal, setMaxVal] = useState();
+  const [randomNumber, setRandomNumber] = useState();
+
+  const giveRandomNumber = () => {
+    setRandomNumber(Math.floor(Math.random() * (maxVal - minVal + 1) + minVal));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <div className="randomNum">
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Random Number:<span>{randomNumber} </span>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div className="numContainer">
+          <p>Min:</p>
+          <input
+            type="number"
+            value={minVal}
+            onChange={(e) => setMinVal(+e.target.value)}
+          />
+        </div>
+        <div className="numContainer">
+          <p>Max:</p>
+          <input
+            type="number"
+            value={maxVal}
+            onChange={(e) => setMaxVal(+e.target.value)}
+          />
+        </div>
+        <button className="numberBtn btn btn-dark" onClick={giveRandomNumber}>
+          Get Random Number
+        </button>
+      </div>
     </div>
   );
 }
